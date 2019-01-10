@@ -1,0 +1,67 @@
+<!-- This is the main page file-->
+<!DOCTYPE HTML>
+<html>
+<meta charset="utf-8"/>
+<head>
+	<title>Our Store</title>
+	<script type="text/javascript", src="product.js"></script> <!-- This is the file for the products -->
+	<script type="text/javascript", src="basket.js"></script> <!-- This is the file for the basket and the basket products -->
+	<script type="text/javascript", src="XMLs.js"></script> <!-- This file contains code for the XML that will be logged in console after the Buy Button, and the XML creation and parse for the refresh of the page -->
+	<link rel="stylesheet" type="text/css" href="styles.css"> <!-- This is the CSS file for the styling -->
+	<!-- In this script I create the pool of products and the basket depending on weather there is a refresh or not -->
+	<script> 
+		// Here is the creation of the four products that someone can buy and the creation of the product_array that stands for the pool
+		let prod1= new Product("1","T-shirt",10,"images/tshirt.jpg",30,["white","black","blue","red","yellow"]);
+		let prod2= new Product("2","Shirt",20,"images/shirt.jpg",20,["white","black"]);
+		let prod3= new Product("3","Jeans",20,"images/jeans.jpg",100,["Small","Medium","Large","XLarge"]);
+		let prod4= new Product("4","Shorts",15,"images/shorts.jpg",25,["Small","Medium","Large"]);
+		let prod_arr= [prod1,prod2,prod3,prod4];
+		// Here is the creation of the basket. I use the functions of localStorage to maintain the state of the basket and the available quantities of the products in pool. This is done by creating an XML and reading it at the beginning of the page.
+		let basket1;
+		if(localStorage.getItem("State")!=null) // In case of refresh
+		{
+			XML_str=localStorage.getItem("State"); // Read the xml
+			pool_products_parse_XML_from_refresh(XML_str,prod_arr); //Parse the text for the products in pool
+			basket1= basket_parse_XML_from_refresh(XML_str,prod_arr); //Parse the text for the bakset
+		}
+		else //In case of first load of page
+		{
+			basket1 = new Basket("basket1"); // Start with an empty basket
+		}
+	</script>
+</head>
+<body> <!--The body consists of three parts. The header, the pool and the basket table. -->
+	<center>
+		<header>
+			<h1>WELCOME TO OUR STORE</h1>
+			<p>I consulted W3Schools, Javascript.info and quora.</p>
+		</header>
+	</center>
+	<!-- For every product I chose to put a div section where the product will be printed and an "add to basket" button that will trigger the function buy_product which is included in the file product.js-->
+	<div class="products_list" id="products">
+		<center>
+			<h2>PRODUCT'S LIST</h2>
+		<div class="product" id="1"></div>
+		<button onclick="buy_product(basket1,'1','1buy_quantity','1pref',prod1,prod_arr);">Add to Basket</button>
+		<div class="product" id="2"></div>
+		<button onclick="buy_product(basket1,'2','2buy_quantity','2pref',prod2,prod_arr);">Add to Basket</button>
+		<div class="product" id="3"></div>
+		<button onclick="buy_product(basket1,'3','3buy_quantity','3pref',prod3,prod_arr);">Add to Basket</button>
+		<div class="product" id="4"></div>
+		<button onclick="buy_product(basket1,'4','4buy_quantity','4pref',prod4,prod_arr);">Add to Basket</button>
+		</center>
+	</div>
+	<!-- Here is the basket table. It will be printed with the function in the script later -->
+	<div class="basket" style="display: inline-block; float: right;" id="table">
+	</div>
+	<!-- With this script I print the basket and every product -->
+	<script type="text/javascript">
+		print_basket(basket1);
+		for(let i in prod_arr)
+		{
+			let id_str= i;
+			print_product(prod_arr[i],basket1);
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+body{
+	background-color: #0000FF;
+
+}
+table, th, td{
+	border: 1px solid black;
+	font-size: 25px;
+}
+header{
+	background-color: #BBBBBB;
+	margin: 50px;
+	padding: 5px;
+	border-width: 3px;
+	border: solid;
+	border-radius: 5px;
+}
+.product{
+	border-width: 3px;
+	border: solid;
+	margin: 5px;
+	padding: 3px;
+	border-radius: 5px;
+}
+.details{
+	display: inline-block;
+}
+.prod_imag{
+	display: inline-block;
+}
+.products_list{
+	display: inline-block; 
+	margin-left: 10%;
+	float: left;
+	border-width: 3px;
+	border: solid;
+	border-radius: 5px;
+	background-color: #BBBBBB;
+	padding: 0% 2% 2% 2%;
+}
+.basket
+{
+	margin-right: 10%;
+	padding: 0% 2% 2% 2%;
+	border: solid 4px;
+	border-radius: 5px;
+	background-color: #BBBBBB;
+}
+footer {
+  background-color: #777;
+  padding: 10px;
+  text-align: center;
+  color: white;
+}
